@@ -2,9 +2,9 @@
 #include <stdlib.h>
 
 struct stack_t {
-    int *data;       /**< динамический массив элементов */
-    size_t size;     /**< текущее количество элементов */
-    size_t capacity; /**< текущая ёмкость */
+    int *data;
+    size_t size;
+    size_t capacity;
 };
 
 stack_t *stack_create(size_t capacity) {
@@ -47,10 +47,16 @@ void stack_destroy(stack_t *s) {
 static stack_error_t stack_resize(stack_t *s) {
     size_t new_cap = s->capacity * 2;
     int *tmp = realloc(s->data, new_cap * sizeof(int));
-    if (!tmp) return STACK_ERROR_MEMORY;
-    s->data = tmp;
-    s->capacity = new_cap;
-    return STACK_SUCCESS;
+    stack_error_t err = STACK_SUCCESS;
+
+    if (!tmp) {
+        err = STACK_ERROR_MEMORY;
+    } else {
+        s->data = tmp;
+        s->capacity = new_cap;
+    }
+
+    return err;
 }
 
 stack_error_t stack_push(stack_t *s, int value) {
