@@ -53,3 +53,26 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# --- Project-specific additions ---
+
+# Python cache and virtual environments
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Generated documentation and analysis reports
+docs/
+reports/
+
+# Test binary (built by make test)
+test/test_stack
+
+# Editor and OS temporary files
+*~
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
